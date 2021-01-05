@@ -7,6 +7,7 @@ import {
     defaultShareInfo,
     wxMenu
 } from './config';
+import { get } from '@tools/fetch';
 
 const isPro = process.env.NODE_ENV === 'production';
 
@@ -21,7 +22,7 @@ class WxSdk {
             console.warn('非微信浏览器，且非production，不能调用该接口: getWxConfig');
             return Promise.resolve('微信签名配置失败');
         }
-        return this.$get(signUrl, {
+        return get(signUrl, {
             entrance: 'bargain',
             url: encodeURIComponent(window.location.href.split('#')[0])
         }).then(result => {

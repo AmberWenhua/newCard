@@ -110,5 +110,6 @@ export default {
 .preview {
     min-height: 100vh;
     background: url("~@imgs/bg.png");
+    background-size: 88%;
 }
 </style>

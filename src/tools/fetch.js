@@ -76,6 +76,28 @@ httpService.interceptors.response.use(
 /*网络请求部分*/
 
 /*
+ *  get请求
+ *  url:请求地址
+ *  params:参数
+ *  headers: 请求头
+ *  notToAuth: 验证信息
+ * */
+export function get(url, params = {}, headers = {}) {
+    return new Promise((resolve, reject) => {
+        httpService({
+            url: url,
+            method: 'get',
+            headers,
+            params
+        }).then(response => {
+            resolve(response);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+/*
  *  文件上传
  *  url:请求地址
  *  params:参数
