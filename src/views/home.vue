@@ -5,7 +5,7 @@
                 <div class="upload hor-ver_center">
                     <Uploader
                         type="file"
-                        v-model="fileList"
+                        v-model="$bus.cardInfo.img"
                         :max-count="1"
                         accept="image/*"
                         :after-read="afterRead"
@@ -22,7 +22,7 @@
                 <div class="edit_box">
                     <Field
                         class="edit_name"
-                        v-model="name"
+                        v-model="$bus.cardInfo.name"
                         label="@"
                         placeholder="输入您的昵称"
                         :right-icon="require('@imgs/pin.png')"
@@ -31,7 +31,7 @@
                 </div>
                 <div class="edit_box edit_flag">
                     <Field
-                        v-model="flag"
+                        v-model="$bus.cardInfo.flag"
                         type="textarea"
                         maxlength="30"
                         autosize
@@ -82,11 +82,8 @@ export default {
     },
     data() {
         return {
-            fileList: [],
             showCutImg: false,
             imgWillCut: "",
-            name: "",
-            flag: "",
         };
     },
     computed: {
@@ -156,25 +153,20 @@ export default {
         // 裁剪成功
         onCutOk(result) {
             this.showCutImg = false;
-            this.fileList[0].file = result.file;
-            this.fileList[0].content = result.base64;
-            // this.upload(this.fileList[0]);
+            this.$bus.cardInfo.img[0].file = result.file;
+            this.$bus.cardInfo.img[0].content = result.base64;
+            // this.upload(this.$bus.cardInfo.img[0]);
         },
         // 上传图片
         async upload(file) {
             let fd = new FormData();
             fd.append("file", file.file);
             fileUpload("/assert/uploadFile", fd).then((res) => {
-                this.fileList[0] = res.data.url;
+                this.$bus.cardInfo.img[0] = res.data.url;
             });
         },
         // 点击生成效果图
         toView() {
-            this.$bus.cardInfo = {
-                img: this.fileList[0] && this.fileList[0].content || '',
-                name: this.name,
-                flag: this.flag,
-            };
             this.$router.push({ path: "/preview" });
         },
     },

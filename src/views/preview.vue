@@ -29,7 +29,7 @@ export default {
             await draw.drawImg(require("@imgs/edit_bg.png"), 0, 31, 750, 1128);
 
             // 绘制头上传的图片
-            const img = this.$bus.cardInfo.img || require("@imgs/defalut_img.png");
+            const img = this.$bus.cardInfo.img[0] && this.$bus.cardInfo.img[0].content || require("@imgs/defalut_img.png");
             await draw.drawImg(img, 186, 285, 375, 375);
 
             // 绘制名字

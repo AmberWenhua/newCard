@@ -3,7 +3,7 @@ const bus = new Vue({
     data() {
         return {
             cardInfo: {
-                img: "",
+                img: [],
                 name: "",
                 flag: ""
             }
