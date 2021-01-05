@@ -1,12 +1,12 @@
-const path = require('path');
 const JsCss2JsonPlugin = require('./JsCss2JsonPlugin');
+const path = require('path');
 const resolve = (p) => path.resolve(p);
 
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
     // 基本路径
-    publicPath: isProd === "production" ? "./" : "/",
+    publicPath: isProd ? "./" : "/",
     // 输出文件目录
     outputDir: "dist",
     // 放置build生成的静态资源 (js、css、img、fonts) 的目录。
@@ -27,7 +27,6 @@ module.exports = {
                 '@styles': resolve('src/styles'),
             }
         },
-
     },
     // css相关配置
     css: {
@@ -46,12 +45,14 @@ module.exports = {
                 // 定义html文件中需要用到的一些数据
                 const htmlParams = {
                     production: true,
-                    inject: isProd,
+                    inject: process.env.NODE_ENV === "development",
                 };
                 Object.assign(args[0], htmlParams);
-                // 不注入js和css，调试模式需要注入
-                args[0].inject = !isProd;
                 return args;
             });
     },
-}
+    // 第三方插件配置
+    pluginOptions: {
+        // ...
+    },
+};

@@ -56,7 +56,7 @@ export default {
             const qr_code_bg = require("@imgs/qr_box.png");
             await draw.drawImg(qr_code_bg, 105, 982, 160, 160);
             // 绘制二维码
-            const qr_code = qrcode.create(window.location.href);
+            const qr_code = qrcode.create('http://cdn-test.via.cool/web/newyear-poster/index.html#/home');
             await draw.drawImg(qr_code, 111, 988, 149, 149);
 
             // 二维码旁边的文字
