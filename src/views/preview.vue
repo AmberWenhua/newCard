@@ -56,10 +56,10 @@ export default {
 
             // 二维码的框
             const qr_code_bg = require("@imgs/qr_box.png");
-            await draw.drawImg(qr_code_bg, 105, 989, 160, 160);
+            await draw.drawImg(qr_code_bg, 105, 982, 160, 160);
             // 绘制二维码
             const qr_code = qrcode.create("http://192.168.101.16:8081/#/");
-            await draw.drawImg(qr_code, 111, 995, 149, 149);
+            await draw.drawImg(qr_code, 111, 988, 149, 149);
 
             // 二维码旁边的文字
             await draw.drawText(
@@ -84,7 +84,7 @@ export default {
                     fontSize: 16,
                     color: "#f8daa1",
                     maxLine: 1,
-                    maxWidth: 360,
+                    maxWidth: 365,
                 }
             );
 
