@@ -76,49 +76,22 @@ httpService.interceptors.response.use(
 /*网络请求部分*/
 
 /*
- *  get请求
- *  url:请求地址
- *  params:参数
- *  headers: 请求头
- * */
-export function get(url, params = {}, headers = {}) {
-    return new Promise((resolve, reject) => {
-        httpService({
-            url: url,
-            method: 'get',
-            headers,
-            params
-        }).then(response => {
-            resolve(response);
-        }).catch(error => {
-            reject(error);
-        });
-    });
-}
-
-/*
- *  post请求
+ *  文件上传
  *  url:请求地址
  *  params:参数
  * */
-export function post(url, params = {}, headers = {}) {
+export function fileUpload(url, params = {}) {
     return new Promise((resolve, reject) => {
         httpService({
             url: url,
             method: 'post',
-            headers,
-            data: {
-                ...params,
-            }
+            data: params,
+            timeout: 0,
+            headers: { 'Content-Type': 'multipart/form-data' }
         }).then(response => {
             resolve(response);
         }).catch(error => {
             reject(error);
         });
     });
-}
-
-export default {
-    get,
-    post,
 }
