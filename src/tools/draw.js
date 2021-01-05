@@ -250,13 +250,15 @@ class Draw {
                 rotate: 0,
                 maxLine: 1,
                 maxWidth: 0,
-                lineSpace: 0
+                lineSpace: 0,
+                textLine: false,
+                textBaseline: 'top',
             }, options);
             this.ctx.save();
             this.ctx.beginPath();
             this.ctx.font = `${_options.fontWeight} ${_options.fontSize}px ${_options.fontFamily}`;
             this.ctx.fillStyle = _options.color;
-            this.ctx.textBaseline = 'top';
+            this.ctx.textBaseline = _options.textBaseline;
             let dText = `${text}`.split('');
             let textList = [];
             let textWidth = this.ctx.measureText(dText.join('')).width;
@@ -291,6 +293,13 @@ class Draw {
                 textList.push(dText);
             } else {
                 textList.push(dText.join(''));
+            }
+            if(_options.textLine) {
+                this.ctx.lineWidth = 1;
+                this.ctx.strokeStyle = _options.color;
+                this.ctx.moveTo(x, y)
+                this.ctx.lineTo(x + textWidth, y)
+                this.ctx.stroke();
             }
             if (_options.center) {
                 x -= textWidth / 2;

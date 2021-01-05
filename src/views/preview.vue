@@ -1,7 +1,6 @@
 <template>
     <div class="preview hor-ver_center">
         <img :src="imgUrlCanvas" v-if="imgUrlCanvas" />
-        <!-- <img :src="imgUrlCanvas_show" style="opacity: 0" /> -->
     </div>
 </template>
 
@@ -30,8 +29,7 @@ export default {
             await draw.drawImg(require("@imgs/edit_bg.png"), 0, 31, 750, 1128);
 
             // 绘制头上传的图片
-            const img =
-                this.$bus.cardInfo.img || require("@imgs/defalut_img.png");
+            const img = this.$bus.cardInfo.img || require("@imgs/defalut_img.png");
             await draw.drawImg(img, 186, 285, 375, 375);
 
             // 绘制名字
@@ -49,7 +47,7 @@ export default {
             await draw.drawText(`2021年，我要${flag}`, 266, 754, {
                 fontSize: 24,
                 color: "#fff7e7",
-                maxLine: 3,
+                maxLine: 4,
                 maxWidth: 220,
                 lineSpace: 16,
             });
@@ -79,12 +77,12 @@ export default {
             await draw.drawText(
                 `据说长按保存并分享的人更能实现2021的小目标哟!`,
                 283,
-                1119,
+                1136,
                 {
                     fontSize: 16,
                     color: "#f8daa1",
-                    maxLine: 1,
-                    maxWidth: 365,
+                    textLine: true,
+                    textBaseline: 'bottom'
                 }
             );
 
