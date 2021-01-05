@@ -10,7 +10,7 @@
                         accept="image/*"
                         :after-read="afterRead"
                         :before-read="beforeRead"
-                        :before-delete="beforeDelete"
+                        :preview-options="preOptions"
                     >
                         <img
                             class="photo"
@@ -41,7 +41,11 @@
                     />
                 </div>
                 <div class="btn">
-                    <img :src="require('@imgs/save.png')" alt="">
+                    <img
+                        @click="toView"
+                        :src="require('@imgs/save.png')"
+                        alt=""
+                    />
                 </div>
             </div>
         </div>
@@ -53,7 +57,7 @@
         >
             <CutImg
                 v-if="showCutImg"
-                :ratio="9 / 16"
+                :ratio="1 / 1"
                 :img="imgWillCut"
                 @cancel="onCutCancel"
                 @ok="onCutOk"
@@ -84,6 +88,14 @@ export default {
             name: "",
             flag: "",
         };
+    },
+    computed: {
+        preOptions() {
+            return {
+                showIndex: false,
+                closeable: true,
+            };
+        },
     },
     mounted() {
         this.$nextTick(() => {
@@ -137,13 +149,6 @@ export default {
                 }
             });
         },
-        // 图片删除
-        beforeDelete() {
-            return new Promise((resolve) => {
-                this.uploadImg = "";
-                return resolve();
-            });
-        },
         // 取消裁剪
         onCutCancel() {
             this.showCutImg = false;
@@ -153,15 +158,24 @@ export default {
             this.showCutImg = false;
             this.fileList[0].file = result.file;
             this.fileList[0].content = result.base64;
-            this.upload(this.fileList[0]);
+            // this.upload(this.fileList[0]);
         },
         // 上传图片
         async upload(file) {
             let fd = new FormData();
             fd.append("file", file.file);
-            fileUpload("/util/uploadFile", fd).then((res) => {
-                this.uploadImg = res.data.url;
+            fileUpload("/assert/uploadFile", fd).then((res) => {
+                this.fileList[0] = res.data.url;
             });
+        },
+        // 点击生成效果图
+        toView() {
+            this.$bus.cardInfo = {
+                img: this.fileList[0] && this.fileList[0].content || '',
+                name: this.name,
+                flag: this.flag,
+            };
+            this.$router.push({ path: "/preview" });
         },
     },
 };
@@ -181,8 +195,7 @@ export default {
         margin: 0 auto;
         .upload {
             height: 375px * $scale;
-            background-color: #8a000b;
-            opacity: 0.7;
+            background-color: rgba(138, 0, 11, 0.7);
             margin-top: 254px * $scale;
             .van-uploader {
                 width: 347px * $scale;
@@ -198,13 +211,28 @@ export default {
                     }
                 }
             }
+            .van-uploader__preview-delete {
+                width: 35px * $scale;
+                height: 35px * $scale;
+                .van-uploader__preview-delete-icon {
+                    font-size: 40px * $scale;
+                }
+            }
+            .van-uploader__preview {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                .van-uploader__preview-image {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
         .edit_box {
             margin-top: 15px * $scale;
             .van-cell {
-                background-color: #8a000b;
+                background-color: rgba(138, 0, 11, 0.7);
                 border-radius: 10px;
-                opacity: 0.7;
                 line-height: 40px * $scale;
                 font-size: 20px * $scale;
                 padding: 20px * $scale;
