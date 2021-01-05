@@ -25,7 +25,8 @@ class WxSdk {
         return get(signUrl, {
             entrance: 'bargain',
             url: encodeURIComponent(window.location.href.split('#')[0])
-        }).then(result => {
+        }).then(res => {
+            const result = res.payload;
             if (!result.appId || !result.timestamp || !result.nonceStr || !result.signature) {
                 console.warn('微信签名参数错误');
                 return Promise.resolve('微信签名配置失败');
