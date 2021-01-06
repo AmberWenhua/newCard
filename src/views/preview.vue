@@ -52,7 +52,7 @@ export default {
                 fontSize: 24,
                 color: "#fff7e7",
                 maxLine: 3,
-                maxWidth: 250,
+                maxWidth: 235,
                 lineSpace: 16,
             });
 
