@@ -65,14 +65,14 @@ export default {
 
             // 二维码旁边的文字
             await draw.drawText(
-                `你的2021新年目标立了吗？识别二维码速速生成您的2021小目标专属卡片哟！`,
+                `你的2021新年小目标立了吗？识别二维码速速生成您的2021小目标专属卡片哟！`,
                 283,
                 1006,
                 {
                     fontSize: 24,
                     color: "#f3ca7d",
                     maxLine: 3,
-                    maxWidth: 300,
+                    maxWidth: 320,
                     lineSpace: 12,
                 }
             );
