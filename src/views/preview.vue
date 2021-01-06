@@ -37,7 +37,7 @@ export default {
             await draw.drawImg(img, 186, 285, 375, 375);
 
             // 绘制名字
-            const name = this.$bus.cardInfo.name || "我是李白";
+            const name = this.$bus.cardInfo.name || "子美今天更美了吗";
             const temp = this.getTextWidth(name, "36px");
             let x = 350 - (temp/2).toFixed(0);
             await draw.drawText(`@${name}`, x, 695, {
