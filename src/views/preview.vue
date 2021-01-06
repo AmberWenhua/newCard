@@ -47,8 +47,12 @@ export default {
             });
 
             // 绘制flag
+            await draw.drawText('2021年', 340, 754, {
+                fontSize: 24,
+                color: "#fff7e7",
+            });
             const flag = this.$bus.cardInfo.flag || "奶茶不要酒 五花马千金裘样样有";
-            await draw.drawText(`2021年，我要${flag}`, 260, 754, {
+            await draw.drawText(`我要${flag}`, 260, 800, {
                 fontSize: 24,
                 color: "#fff7e7",
                 maxLine: 3,
