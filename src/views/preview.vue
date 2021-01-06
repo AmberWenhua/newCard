@@ -1,5 +1,6 @@
 <template>
     <div class="preview hor-ver_center">
+        <Loading type="spinner" v-if="!imgUrlCanvas" />
         <img :src="imgUrlCanvas" v-if="imgUrlCanvas" />
     </div>
 </template>
@@ -7,6 +8,7 @@
 <script>
 import Draw from "@tools/draw.js";
 import qrcode from "@tools/qrcode.js";
+import { Loading } from 'vant';
 
 export default {
     name: "Preview",
@@ -18,13 +20,15 @@ export default {
     mounted() {
         this.drawPoster();
     },
+    components: {
+        Loading
+    },
     methods: {
         async drawPoster() {
             const draw = new Draw();
             draw.init(750, 1206);
             // 绘制背景图
             await draw.drawImg(require("@imgs/bg.png"));
-
             // 绘制屋檐
             await draw.drawImg(require("@imgs/edit_bg.png"), 0, 31, 750, 1128);
 
@@ -43,12 +47,12 @@ export default {
             });
 
             // 绘制flag
-            const flag = this.$bus.cardInfo.flag || "少喝酒我要在家蹲我要对杜甫好一点";
-            await draw.drawText(`2021年，我要${flag}`, 266, 754, {
+            const flag = this.$bus.cardInfo.flag || "少喝酒 我要在家蹲，我要对杜甫好一点";
+            await draw.drawText(`2021年，我要${flag}`, 260, 754, {
                 fontSize: 24,
                 color: "#fff7e7",
-                maxLine: 4,
-                maxWidth: 220,
+                maxLine: 3,
+                maxWidth: 250,
                 lineSpace: 16,
             });
 

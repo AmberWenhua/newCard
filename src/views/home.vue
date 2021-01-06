@@ -117,11 +117,7 @@ export default {
             // 大于 2m 小于 10M 则压缩, 大于 10M 则提示图片过大
             return new Promise((resolve, reject) => {
                 if (file.size > 10485760) {
-                    Toast(
-                        `${this.$t(
-                            "fireworks.apis.图片大小不得超过10M"
-                        )}\n${this.$t("fireworks.apis.请重新选择图片")}`
-                    );
+                    Toast(`图片大小不得超过10M,请重新选择图片`);
                     return reject(false);
                 }
                 // 小于5M直接生成

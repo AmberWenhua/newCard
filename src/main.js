@@ -18,7 +18,7 @@ if (!isProd || window.location.href.indexOf('debug=true') > -1) {
 
 Vue.config.productionTip = false
 
-Vue.prototype.$wxsdk.getWxConfig();
+// Vue.prototype.$wxsdk.getWxConfig();
 
 new Vue({
   router,
