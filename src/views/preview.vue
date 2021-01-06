@@ -47,17 +47,17 @@ export default {
             });
 
             // 绘制flag
-            await draw.drawText('2021年', 340, 754, {
+            await draw.drawText('2021年，我要', 300, 754, {
                 fontSize: 24,
                 color: "#fff7e7",
             });
             const flag = this.$bus.cardInfo.flag || "奶茶不要酒 五花马千金裘样样有";
-            await draw.drawText(`我要${flag}`, 260, 800, {
+            await draw.drawText(flag, 260, 795, {
                 fontSize: 24,
                 color: "#fff7e7",
                 maxLine: 3,
-                maxWidth: 235,
-                lineSpace: 16,
+                maxWidth: 233,
+                lineSpace: 14,
             });
 
             // 二维码的框
@@ -69,7 +69,7 @@ export default {
 
             // 二维码旁边的文字
             await draw.drawText(
-                `你的2021新年小目标立了吗？识别二维码速速生成您的2021小目标专属卡片哟！`,
+                `您的2021新年小目标立了吗？识别二维码速速生成您的2021小目标专属卡片哟！`,
                 283,
                 1006,
                 {

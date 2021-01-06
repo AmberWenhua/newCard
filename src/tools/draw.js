@@ -273,7 +273,11 @@ class Draw {
                             dText.unshift(w);
                             break;
                         }
-                        text += w;
+                        if(w === undefined) {
+                            break;
+                        }else {
+                            text += w;
+                        }
                     }
                     textList.push(text);
                 }
