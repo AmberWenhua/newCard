@@ -47,7 +47,7 @@ export default {
             });
 
             // 绘制flag
-            const flag = this.$bus.cardInfo.flag || "少喝酒 我要在家蹲，我要对杜甫好一点";
+            const flag = this.$bus.cardInfo.flag || "奶茶不要酒 五花马千金裘样样有";
             await draw.drawText(`2021年，我要${flag}`, 260, 754, {
                 fontSize: 24,
                 color: "#fff7e7",
