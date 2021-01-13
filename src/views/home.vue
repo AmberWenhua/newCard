@@ -70,7 +70,6 @@
 import { compressImg } from "@tools/handle.js";
 import { Uploader, Popup, Toast, Field } from "vant";
 import CutImg from "@comp/CutImg";
-import { fileUpload } from "@tools/fetch";
 
 export default {
     name: "Home",
