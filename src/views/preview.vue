@@ -8,7 +8,7 @@
 <script>
 import Draw from "@tools/draw.js";
 import qrcode from "@tools/qrcode.js";
-import { Loading } from 'vant';
+import { Loading } from "vant";
 
 export default {
     name: "Preview",
@@ -21,7 +21,7 @@ export default {
         this.drawPoster();
     },
     components: {
-        Loading
+        Loading,
     },
     methods: {
         async drawPoster() {
@@ -34,37 +34,62 @@ export default {
 
             // 绘制头上传的图片
             const img = this.$bus.cardInfo.img[0] && this.$bus.cardInfo.img[0].content || require("@imgs/defalut_img.png");
-            await draw.drawImg(img, 186, 285, 375, 375);
+            await draw.drawImg(img, 186, 285, 375, 355);
 
             // 绘制名字
             const name = this.$bus.cardInfo.name || "子美今天更美了吗";
             const temp = this.getTextWidth(name, "36px");
-            let x = 350 - (temp/2).toFixed(0);
-            await draw.drawText(`@${name}`, x, 695, {
+            let x = 350 - (temp / 2).toFixed(0);
+            await draw.drawText(`@${name}`, x, 675, {
                 fontSize: 36,
                 fontWeight: "bold",
                 color: "#fff7e7",
             });
 
             // 绘制flag
-            await draw.drawText('2021年，我要', 300, 754, {
+            await draw.drawText("2021年，我要", 300, 734, {
                 fontSize: 24,
                 color: "#fff7e7",
             });
-            const flag = this.$bus.cardInfo.flag || "奶茶不要酒 五花马千金裘样样有";
-            await draw.drawText(flag, 260, 795, {
-                fontSize: 24,
-                color: "#fff7e7",
-                maxLine: 3,
-                maxWidth: 233,
-                lineSpace: 14,
-            });
+            const flag = this.$bus.cardInfo.flag || "奶茶不要酒\n五花马千金裘\n样样有";
+            let oW = 0, sizeWidth = 0, maxWidth = 230, maxLine = 3, y = 0;
+            // 有换行符，折行并居中显示
+            if (flag.indexOf("\n") > -1) {
+                let newFlag = flag.split("\n");
+                await newFlag.forEach((item, index) => {
+                    if(index > maxLine - 1) {
+                        item = '...';
+                        y = 737 + 34 * (index + 1);
+                    }else {
+                        y = 737 + 38 * (index + 1);
+                    }
+                    oW = this.getTextWidth(item, "24px");
+                    sizeWidth = oW < maxWidth? (375 - oW/2).toFixed(0) : 270;
+                    draw.drawText(item, sizeWidth, y, {
+                        fontSize: 24,
+                        color: "#fff7e7",
+                        maxLine: 1,
+                        maxWidth,
+                        lineSpace: 14,
+                    });
+                });
+            } else {
+                oW = this.getTextWidth(flag, "24px");
+                sizeWidth = oW < maxWidth? (375 - oW/2).toFixed(0) : 270;
+                await draw.drawText(flag, sizeWidth, 775, {
+                    fontSize: 24,
+                    color: "#fff7e7",
+                    maxLine,
+                    maxWidth,
+                    lineSpace: 14,
+                });
+            }
 
             // 二维码的框
             const qr_code_bg = require("@imgs/qr_box.png");
             await draw.drawImg(qr_code_bg, 105, 982, 160, 160);
             // 绘制二维码
-            const qr_code = qrcode.create('http://cdn-test.via.cool/web/newyear-poster/index.html#/home');
+            const qr_code = qrcode.create(window.location.href);
             await draw.drawImg(qr_code, 111, 988, 149, 149);
 
             // 二维码旁边的文字

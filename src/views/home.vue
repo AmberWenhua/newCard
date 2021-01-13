@@ -151,15 +151,6 @@ export default {
             this.showCutImg = false;
             this.$bus.cardInfo.img[0].file = result.file;
             this.$bus.cardInfo.img[0].content = result.base64;
-            // this.upload(this.$bus.cardInfo.img[0]);
-        },
-        // 上传图片
-        async upload(file) {
-            let fd = new FormData();
-            fd.append("file", file.file);
-            fileUpload("/assert/uploadFile", fd).then((res) => {
-                this.$bus.cardInfo.img[0] = res.data.url;
-            });
         },
         // 点击生成效果图
         toView() {
@@ -177,6 +168,7 @@ export default {
     .bg_box {
         background: url("~@imgs/edit_bg.png");
         background-size: 100% 100%;
+        position: relative;
     }
     .content {
         width: 375px * $scale;
@@ -274,7 +266,9 @@ export default {
             }
         }
         .btn {
-            margin-top: 159px * $scale;
+            position: absolute;
+            bottom: 32px * $scale;
+            width: 385px * $scale;
         }
     }
 }
