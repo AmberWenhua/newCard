@@ -19,6 +19,7 @@ html {
 body {
     max-width: 750px;
     margin: 0 auto !important;
+    background: #ffdf88;
 }
 
 /* 禁止缩放表单 */

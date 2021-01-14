@@ -1,5 +1,8 @@
 # poster
 
+该项目主要是，添加图片，填写名字跟目标，生成一张海报。
+该项目中，没有使用任何的接口，利用canvas生成海报，和二维码
+
 ## Project setup
 ```
 npm install

@@ -103,6 +103,15 @@ export default {
                 this.$refs.view_content
             );
         });
+        window.addEventListener("resize", () => {
+            this.$bus.computeWH(
+                750,
+                1175,
+                this.$refs.card.clientWidth,
+                this.$refs.card.clientHeight,
+                this.$refs.view_content
+            );
+        });
     },
     methods: {
         // 读取图片数据

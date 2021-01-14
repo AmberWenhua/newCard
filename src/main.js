@@ -4,7 +4,6 @@ import router from "./router"
 import Vconsole from "vconsole"
 
 import "@tools/rem"
-import '@tools/wx/index'
 import "@styles/reset.css"
 import '@tools/bus'
 import 'vant/lib/index.css'
@@ -17,8 +16,6 @@ if (!isProd || window.location.href.indexOf('debug=true') > -1) {
 }
 
 Vue.config.productionTip = false
-
-// Vue.prototype.$wxsdk.getWxConfig();
 
 new Vue({
   router,
